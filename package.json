@@ -1,0 +1,34 @@
+{
+  "name": "cat",
+  "version": "1.0.1",
+  "description": "oof",
+  "main": "cat.js",
+  "dependencies": {
+    "better-sqlite-pool": "^0.1.2",
+    "better-sqlite3": "^5.0.1",
+    "cleverbot-node": "^0.3.11",
+    "discord.js": "^12.0.0-dev",
+    "enmap": "^3.1.4",
+    "enmap-mongo": "^2.0.2",
+    "enmap-sqlite": "^2.0.5",
+    "moment": "^2.23.0",
+    "moment-duration-format": "^2.2.2",
+    "node-fetch": "^2.3.0",
+    "node-gyp": "^3.8.0",
+    "random-puppy": "^1.1.0",
+    "superagent": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "hm"
+  },
+  "keywords": [
+    "hi"
+  ],
+  "author": "etcroot",
+  "license": "MIT"
+}
