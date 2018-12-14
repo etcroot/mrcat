@@ -23,12 +23,12 @@ client.on('ready', () => {
 });
 
 // Guild Join event
-client.on('guildCreate', guild => {
+client.on('guildCreate', () => {
   client.user.setActivity(`${cfg.prefix}help | ${client.guilds.size} guilds`, { type: 'WATCHING' });
 });
 
 // Guild Leave event
-client.on('guildDelete', guild => {
+client.on('guildDelete', () => {
   client.user.setActivity(`${cfg.prefix}help | ${client.guilds.size} guilds`, { type: 'WATCHING' });
 });
 
