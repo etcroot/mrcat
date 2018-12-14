@@ -22,6 +22,17 @@ client.on('ready', () => {
   client.user.setActivity(`${cfg.prefix}help | ${client.guilds.size} guilds`, { type: 'WATCHING' });
 });
 
+// Guild Join event
+client.on('guildCreate', guild => {
+  client.user.setActivity(`${cfg.prefix}help | ${client.guilds.size} guilds`, { type: 'WATCHING' });
+});
+
+// Guild Leave event
+client.on('guildDelete', guild => {
+  client.user.setActivity(`${cfg.prefix}help | ${client.guilds.size} guilds`, { type: 'WATCHING' });
+});
+
+
 client.on("message", async (message) => {
   const emcolor = "#363942";
   let score;
