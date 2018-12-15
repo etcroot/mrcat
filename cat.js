@@ -127,10 +127,8 @@ client.on("message", async (message) => {
   // Give Points
   if(command === "give") {
     if(message.author.id !== cfg.owner) return;
-   
     const user = message.mentions.users.first() || client.users.get(args[0]);
     if(!user) return message.reply("You must mention someone or give their ID!");
-   
     const pointsToAdd = parseInt(args[1], 10);
     if(!pointsToAdd) return message.reply("You didn't tell me how many points to give...")
     let userscore = client.getScore.get(user.id, message.guild.id);
@@ -141,7 +139,6 @@ client.on("message", async (message) => {
     let userLevel = Math.floor(0.1 * Math.sqrt(score.points));
     userscore.level = userLevel;
     client.setScore.run(userscore);
-   
     return message.channel.send(`${user.tag} has received ${pointsToAdd} catnips and now stands at ${userscore.points} catnips.`);
   }
   // Say
@@ -245,15 +242,10 @@ client.on("message", async (message) => {
   }
   // Search Anime
   if(command === "anime") {
-    
     var search = message.content.split(/\s+/g).slice(1).join(" ");
-
     if (!search) {
-
         kitsu.searchAnime(aq().quoteanime).then(result => {
-
             var anime = result[0]
-
             var embed = new MessageEmbed()
                 .setColor(emcolor)
                 .setAuthor(`${anime.titles.english} | ${anime.showType}`, anime.posterImage.original)
@@ -267,14 +259,11 @@ client.on("message", async (message) => {
 
     } else {
         var search = message.content.split(/\s+/g).slice(1).join(" ");
-
         kitsu.searchAnime(search).then(result => {
             if (result.length === 0) {
                 return message.channel.send(`No results found for **${search}**!`);
             }
-
             var anime = result[0]
-
             var embed = new MessageEmbed()
                 .setColor(emcolor)
                 .setAuthor(`${anime.titles.english ? anime.titles.english : search} | ${anime.showType}`, anime.posterImage.original)
@@ -296,14 +285,11 @@ client.on("message", async (message) => {
         if (!search) {
             return message.channel.send('Please provide me a manga to search for!');
         }
-
         kitsu.searchManga(search).then(result => {
             if (result.length === 0) {
                 return message.channel.send(`No results found for **${search}**!`);
             }
-
             var manga = result[0]
-
             var embed = new MessageEmbed()
                 .setColor(emcolor)
                 .setAuthor(`${manga.titles.english}`, manga.posterImage.original)
@@ -313,8 +299,6 @@ client.on("message", async (message) => {
                 .addField('❯\u2000\Status', `•\u2000\**Volumes:** ${manga.volumeCount ? manga.volumeCount : '`N/A`'}\n\•\u2000\**Start Date:** ${manga.startDate}\n\•\u2000\**End Date:** ${manga.endDate ? manga.endDate : "Ongoing"}`, true)
                 .setImage(manga.posterImage.original);
             return message.channel.send({embed});
-            
-
         }).catch(err => {
             console.log(err);
             return message.channel.send(`No results found for **${search}**!`)
