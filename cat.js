@@ -61,13 +61,13 @@ client.on("message", async (message) => {
     const embed = new MessageEmbed()
     .setTitle('__Mr.Cat Commands 101__')
     .setDescription('All commands uses `mr.`')
-    .addField('__General__', `**${cfg.prefix}help**\nget cat help.\n**${cfg.prefix}ping**\nget cat ping.\n**${cfg.prefix}info**\ncat info.\n**${cfg.prefix}inv**\ninvite me.\n**${cfg.prefix}support**\ncat support hotline.\n`, true)
-    .addField('__Weaboos__', `**${cfg.prefix}anime**\nrandom or search anime.\n**${cfg.prefix}manga**\nandom or search manga.\n**${cfg.prefix}animeme**\nanime memes.\n**${cfg.prefix}moe**\nmoe's.`, true)
-    .addField('__Rank__', `**${cfg.prefix}catnips**\nsee catnips.\n**${cfg.prefix}lb**\nshow catnipboard.\n**${cfg.prefix}howto**\nhow to catnip.`, true)
-    .addField('__Catlicious__', `**${cfg.prefix}cat**\nget cat.\n**${cfg.prefix}catmeme**\nget catmeme.\n**${cfg.prefix}sadcat**\nget sad cat.\n`, true)
-    .addField('__Normies__', `**${cfg.prefix}meme**\ngeneric meme.\n**${cfg.prefix}meirl**\nyou irl.`, true)
-    .addField('__Utility__', `**${cfg.prefix}remindme**\nforget much?`, true)
-    .setFooter('Gib mouse, thanks.')
+    .addField('__General__', `**${cfg.prefix}help**\n\`get cat help.\`\n**${cfg.prefix}ping**\n\`get cat ping.\`\n**${cfg.prefix}info**\n\`cat info.\`\n**${cfg.prefix}inv**\n\`invite me.\`\n**${cfg.prefix}support**\n\`cat support hotline.\``, true)
+    .addField('__Weaboos__', `**${cfg.prefix}anime**\n\`random or search anime.\`\n**${cfg.prefix}manga**\n\`random or search manga.\`\n**${cfg.prefix}animeme**\n\`anime memes.\`\n**${cfg.prefix}moe**\n\`moe's.\``, true)
+    .addField('__Rank__', `**${cfg.prefix}catnips**\n\`see catnips.\`\n**${cfg.prefix}lb**\n\`show catnipboard.\`\n**${cfg.prefix}howto**\n\`how to catnip.\``, true)
+    .addField('__Catlicious__', `**${cfg.prefix}cat**\n\`get cat.\`\n**${cfg.prefix}catmeme**\n\`get catmeme.\`\n**${cfg.prefix}sadcat**\n\`get sad cat.\`\n`, true)
+    .addField('__Normies__', `**${cfg.prefix}meme**\n\`generic meme.\`\n**${cfg.prefix}meirl**\n\`you irl.\``, true)
+    .addField('__Utility__', `**${cfg.prefix}remindme**\n\`forget much?\``, true)
+    .setFooter('Mr.Cat | Gib mouse, thanks.')
     .setColor(emcolor)
     return message.channel.send(embed);
   }
@@ -87,7 +87,7 @@ client.on("message", async (message) => {
     .addField('__Memory Usage__', `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`, true)
     .addField('__Prefix__', '`mr.`', true)
     .addField('__Developer__', '<@484765734803734540>', true)
-    .setFooter('Gib mouse, thanks.')
+    .setFooter('Mr.Cat | Gib mouse, thanks.')
     .setColor(emcolor)
     return message.channel.send(embed);
   }
