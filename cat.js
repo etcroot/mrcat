@@ -62,7 +62,7 @@ client.on("message", async (message) => {
     .setTitle('__Mr.Cat Commands 101__')
     .setDescription('All commands uses `mr.`')
     .addField('__General__', `**${cfg.prefix}help**\n\`get cat help.\`\n**${cfg.prefix}ping**\n\`get cat ping.\`\n**${cfg.prefix}info**\n\`cat info.\`\n**${cfg.prefix}inv**\n\`invite me.\`\n**${cfg.prefix}support**\n\`cat support hotline.\``, true)
-    .addField('__Weaboos__', `**${cfg.prefix}anime**\n\`random or search anime.\`\n**${cfg.prefix}manga**\n\`random or search manga.\`\n**${cfg.prefix}animeme**\n\`anime memes.\`\n**${cfg.prefix}moe**\n\`moe's.\``, true)
+    .addField('__Weaboos__', `**${cfg.prefix}anime**\n\`random or search anime.\`\n**${cfg.prefix}manga**\n\`search manga.\`\n**${cfg.prefix}animeme**\n\`anime memes.\`\n**${cfg.prefix}moe**\n\`moe's.\``, true)
     .addField('__Rank__', `**${cfg.prefix}catnips**\n\`see catnips.\`\n**${cfg.prefix}lb**\n\`show catnipboard.\`\n**${cfg.prefix}howto**\n\`how to catnip.\``, true)
     .addField('__Catlicious__', `**${cfg.prefix}cat**\n\`get cat.\`\n**${cfg.prefix}catmeme**\n\`get catmeme.\`\n**${cfg.prefix}sadcat**\n\`get sad cat.\`\n`, true)
     .addField('__Normies__', `**${cfg.prefix}meme**\n\`generic meme.\`\n**${cfg.prefix}meirl**\n\`you irl.\``, true)
