@@ -91,7 +91,7 @@ client.on("message", async (message) => {
         \`${cfg.prefix}cat\` → get cat.
         \`${cfg.prefix}catmeme\` → get catmeme.
         \`${cfg.prefix}sadcat\` → get sad cat.
-        \`${cfg.prefix}catfact\` → get catfacts.
+        \`${cfg.prefix}fact\` → get catfacts.
     `])
     return message.channel.send(embed);
 }
@@ -226,7 +226,7 @@ if(cmd === 'util') {
     message.channel.send(text);
   }
   // Cat Facts
-  if(command === "catfact") {
+  if(command === "fact") {
     const fact = await get("https://catfact.ninja/fact")
       .then((res) => res.body.fact);
     return message.channel.send(`📢 **Catfact:** *${fact}*`);
