@@ -12,7 +12,7 @@ const ms = require("ms");
 const Kitsu = require('kitsu.js');
 const kitsu = new Kitsu();
 var aq = require('animequote');
-const booru = require('booru');
+const catname = require('cat-names');
 
 // Ready Event
 client.on('ready', () => {
@@ -57,13 +57,14 @@ client.on("message", async (message) => {
   const args = message.content.slice(cfg.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   if(command === "help") {
+    const owner = "etcroot#7884";
   const cmd = args.join(" ");
   // Sending help message when only writing help.
   if(!args[0]) {
       let embed = new MessageEmbed()
       .setTitle('General Commands')
       .setColor(emcolor)
-      .setFooter(`${client.user.username} | By: etcroot#6666`)
+      .setFooter(`${client.user.username} | By: ${owner}`)
       .setDescription([`
       \`${cfg.prefix}help\` → get help menu.
       \`${cfg.prefix}info\` → get bot information.
@@ -86,11 +87,12 @@ client.on("message", async (message) => {
     let embed = new MessageEmbed()
     .setTitle('Help 101 → Catlicious')
     .setColor(emcolor)
-    .setFooter(`${client.user.username} | By: etcroot#6666`)
+    .setFooter(`${client.user.username} | By: ${owner}`)
     .setDescription([`
         \`${cfg.prefix}cat\` → get cat.
         \`${cfg.prefix}catmeme\` → get catmeme.
         \`${cfg.prefix}sadcat\` → get sad cat.
+        \`${cfg.prefix}catname\` → get cat names.
         \`${cfg.prefix}fact\` → get catfacts.
     `])
     return message.channel.send(embed);
@@ -100,7 +102,7 @@ if(cmd === 'weeb') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Weaboo')
   .setColor(emcolor)
-  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
       \`${cfg.prefix}anime\` → random or search anime.
       \`${cfg.prefix}manga\` → search manga.
@@ -114,7 +116,7 @@ if(cmd === 'catnip') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Catnip')
   .setColor(emcolor)
-  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
       \`${cfg.prefix}catnips\` → see catnips.
       \`${cfg.prefix}lb\` → show catnipboard.
@@ -127,7 +129,7 @@ if(cmd === 'normie') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Normies')
   .setColor(emcolor)
-  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
       \`${cfg.prefix}meme\` → generic meme.
       \`${cfg.prefix}meirl\` → you irl.
@@ -139,11 +141,23 @@ if(cmd === 'util') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Utility')
   .setColor(emcolor)
-  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
       \`${cfg.prefix}remineme\` → forget much?
       \`${cfg.prefix}gaycalc\` → calculate gayness.
       \`${cfg.prefix}weebcalc\` → calculate weebness.
+      \`${cfg.prefix}greentxt\` → greentext on discord.
+  `])
+  return message.channel.send(embed);
+}
+// Animals
+if(cmd === 'animals') {
+  let embed = new MessageEmbed()
+  .setTitle('Help 101 → Animals')
+  .setColor(emcolor)
+  .setFooter(`${client.user.username} | By: ${owner}`)
+  .setDescription([`
+      Nothing to see here yet.
   `])
   return message.channel.send(embed);
 }
@@ -429,6 +443,28 @@ if(cmd === 'util') {
     } else {
       return message.channel.send(`${member}, ${randomweeb}`)
     }
+  }
+  if(command === "catname") {
+    const name = catname.random();
+    const embed = new MessageEmbed() 
+    .setColor(emcolor)
+    .setTitle('Generic Stupid Cat Names')
+    .setDescription(`Here's a cat name: \`${name}\``)
+    return message.channel.send(embed);
+  }
+  if(command === "greentxt") {
+    if (!args[0]) return message.channel.send("Tell me something to make it green!", {
+      code: "css"
+    });
+    if (args[0] == "-d") {
+      message.delete().then(args.shift());
+      return message.channel.send(args.join(" "), {
+        code: "css"
+      });
+    }
+    message.channel.send(args.join(" "), {
+      code: "css"
+    });
   }
 });
 
