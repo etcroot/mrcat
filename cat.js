@@ -12,6 +12,7 @@ const ms = require("ms");
 const Kitsu = require('kitsu.js');
 const kitsu = new Kitsu();
 var aq = require('animequote');
+const booru = require('booru');
 
 // Ready Event
 client.on('ready', () => {
@@ -64,7 +65,7 @@ client.on("message", async (message) => {
     .addField('__Rank__', `\`${cfg.prefix}catnips\` - see catnips.\n\`${cfg.prefix}lb\` - show catnipboard.\n\`${cfg.prefix}howto\` - how to catnip.`, true)
     .addField('__Catlicious__', `\`${cfg.prefix}cat\` - get cat.\n\`${cfg.prefix}catmeme\` - get catmeme.\n\`${cfg.prefix}sadcat\` - get sad cat.\n`, true)
     .addField('__Normies__', `\`${cfg.prefix}meme\` - generic meme.\n\`${cfg.prefix}meirl\` - you irl.`, true)
-    .addField('__Weaboos__', `\`${cfg.prefix}anime\` - search anime.\n\`${cfg.prefix}animeme\` - anime memes.`, true)
+    .addField('__Weaboos__', `\`${cfg.prefix}anime\` - search anime.\n\`${cfg.prefix}manga\` - search manga.\n\`${cfg.prefix}animeme\` - anime memes.\n\`${cfg.prefix}moe\` - moe's.`, true)
     .addField('__Utility__', `\`${cfg.prefix}remindme\` - forget much?`, true)
     .setFooter('Gib mouse, thanks.')
     .setColor(emcolor)
@@ -209,7 +210,7 @@ client.on("message", async (message) => {
      return message.channel.send({ embed });
 })
   }
-  // Me IRL
+  // Animeme
   if(command === "animeme") {
     randomPuppy('animemes')
     .then(url => {
@@ -219,6 +220,17 @@ client.on("message", async (message) => {
      return message.channel.send({ embed });
 })
   }
+  // Moe
+  if(command === "moe") {
+    randomPuppy('awwnime')
+    .then(url => {
+        const embed = new MessageEmbed()
+        .setImage(url)
+        .setColor(emcolor)
+     return message.channel.send({ embed });
+})
+  }
+  // Remind Command
   if(command === "remindme") {
     let reminderTime = args[0];
       if(!reminderTime) return message.channel.send(`**Specify a time for me to remind you. Usage: \`${cfg.prefix}remind 15min | Code**\``);
@@ -232,6 +244,7 @@ client.on("message", async (message) => {
         return message.author.send(`Hey! You wanted me to remind you: ${reminder}`)
       }, ms(reminderTime));
   }
+  // Search Anime
   if(command === "anime") {
     
     var search = message.content.split(/\s+/g).slice(1).join(" ");
@@ -278,6 +291,36 @@ client.on("message", async (message) => {
         });
     }
   }
+  // Search Manga
+  if(command === "manga") {
+    var search = message.content.split(/\s+/g).slice(1).join(" ");
+        if (!search) {
+            return message.channel.send('Please provide me a manga to search for!');
+        }
+
+        kitsu.searchManga(search).then(result => {
+            if (result.length === 0) {
+                return message.channel.send(`No results found for **${search}**!`);
+            }
+
+            var manga = result[0]
+
+            var embed = new MessageEmbed()
+                .setColor(emcolor)
+                .setAuthor(`${manga.titles.english}`, manga.posterImage.original)
+                .setDescription(manga.synopsis.replace(/<[^>]*>/g, '').split('\n')[0])
+                .addField('❯\u2000\Information', `•\u2000\**Japanese Name:** ${manga.titles.romaji}\n\•\u2000\**Age Rating:** ${manga.ageRating ? manga.ageRating : '`N/A`'}\n\•\u2000\**Chapters:** ${manga.chapterCount ? manga.chapterCount : '`N/A`'}`, true)
+                .addField('❯\u2000\Stats', `•\u2000\**Average Rating:** ${manga.averageRating ? manga.averageRating : '`N/A`'}\n\•\u2000\**Rating Rank:** ${manga.ratingRank ? manga.ratingRank : '`N/A`'}\n\•\u2000\**Popularity Rank:** ${manga.popularityRank ? manga.popularityRank : '`N/A`'}`, true)
+                .addField('❯\u2000\Status', `•\u2000\**Volumes:** ${manga.volumeCount ? manga.volumeCount : '`N/A`'}\n\•\u2000\**Start Date:** ${manga.startDate}\n\•\u2000\**End Date:** ${manga.endDate ? manga.endDate : "Ongoing"}`, true)
+                .setImage(manga.posterImage.original);
+            return message.channel.send({embed});
+            
+
+        }).catch(err => {
+            console.log(err);
+            return message.channel.send(`No results found for **${search}**!`)
+        })
+	}
 });
 
 client.login(cfg.token);
