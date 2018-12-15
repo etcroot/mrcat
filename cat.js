@@ -222,6 +222,18 @@ if(cmd === 'util') {
     message.delete().catch(O_o=>{}); 
     message.channel.send(text);
   }
+  // Embed
+  if(command === "embed"){
+    if(message.author.id !== cfg.owner) return;
+    let text = args.join(" ");
+    if(!text) {
+      return message.channel.send('Specify something to say.');
+    }
+    const embed = new MessageEmbed()
+    .setDescription(text)
+    .setColor(emcolor)
+    message.channel.send(embed);
+  }
   // Cat Facts
   if(command === "fact") {
     const fact = await get("https://catfact.ninja/fact")
