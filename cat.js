@@ -218,6 +218,7 @@ if(cmd === 'util') {
   }
   // Say
   if(command === "say"){
+    if(message.author.id !== cfg.owner) return;
     let text = args.join(" ");
     if(!text) {
       return message.channel.send('Specify something to say.');
