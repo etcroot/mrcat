@@ -39,7 +39,7 @@ client.on('guildDelete', () => {
   client.user.setActivity(`${cfg.prefix}help | ${client.guilds.size} guilds`, { type: 'WATCHING' });
 });
 
-
+// Commands
 client.on("message", async (message) => {
   const emcolor = "#363942";
   let score;
