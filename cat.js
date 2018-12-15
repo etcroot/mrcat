@@ -81,7 +81,6 @@ client.on("message", async (message) => {
           \`${cfg.prefix}help weeb\` → get weeb help.
           \`${cfg.prefix}help catnip\` → get catnip help.
           \`${cfg.prefix}help normie\` → get normie help.
-          \`${cfg.prefix}help animals\` → get animals help.
           \`${cfg.prefix}help util\` → get util help.
       `])
       .addField('Prefix Information', `Prefix: \`${cfg.prefix}\``, false)
@@ -148,21 +147,10 @@ if(cmd === 'util') {
   .setColor(emcolor)
   .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
-      \`${cfg.prefix}remineme\` → forget much?
+      \`${cfg.prefix}remindme\` → forget much?
       \`${cfg.prefix}gaycalc\` → calculate gayness.
       \`${cfg.prefix}weebcalc\` → calculate weebness.
       \`${cfg.prefix}greentxt\` → greentext on discord.
-  `])
-  return message.channel.send(embed);
-}
-// Animals
-if(cmd === 'animals') {
-  let embed = new MessageEmbed()
-  .setTitle('Help 101 → Animals')
-  .setColor(emcolor)
-  .setFooter(`${client.user.username} | By: ${owner}`)
-  .setDescription([`
-  \`${cfg.prefix}aww\` → /r/Aww.
   `])
   return message.channel.send(embed);
 }
