@@ -91,6 +91,7 @@ client.on("message", async (message) => {
         \`${cfg.prefix}cat\` → get cat.
         \`${cfg.prefix}catmeme\` → get catmeme.
         \`${cfg.prefix}sadcat\` → get sad cat.
+        \`${cfg.prefix}catfact\` → get catfacts.
     `])
     return message.channel.send(embed);
 }
