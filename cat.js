@@ -85,7 +85,7 @@ client.on("message", async (message) => {
   // Catlicious
   if(cmd === 'cat') {
     let embed = new MessageEmbed()
-    .setTitle('Help 101 → Catlicios')
+    .setTitle('Help 101 → Catlicious')
     .setColor('#36393F')
     .setFooter(`${client.user.username} | By: etcroot#6666`)
     .setDescription([`
