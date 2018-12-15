@@ -56,21 +56,96 @@ client.on("message", async (message) => {
   if (message.content.indexOf(cfg.prefix) !== 0) return;
   const args = message.content.slice(cfg.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
-  // Help Command
-  if (command === "help") {
-    const embed = new MessageEmbed()
-    .setTitle('__Mr.Cat Commands 101__')
-    .setDescription('All commands uses `mr.`')
-    .addField('__General__', `**${cfg.prefix}help**\n\`get cat help.\`\n**${cfg.prefix}ping**\n\`get cat ping.\`\n**${cfg.prefix}info**\n\`cat info.\`\n**${cfg.prefix}inv**\n\`invite me.\`\n**${cfg.prefix}support**\n\`cat support hotline.\``, true)
-    .addField('__Weaboos__', `**${cfg.prefix}anime**\n\`random or search anime.\`\n**${cfg.prefix}manga**\n\`search manga.\`\n**${cfg.prefix}animeme**\n\`anime memes.\`\n**${cfg.prefix}moe**\n\`moe's.\``, true)
-    .addField('__Rank__', `**${cfg.prefix}catnips**\n\`see catnips.\`\n**${cfg.prefix}lb**\n\`show catnipboard.\`\n**${cfg.prefix}howto**\n\`how to catnip.\``, true)
-    .addField('__Catlicious__', `**${cfg.prefix}cat**\n\`get cat.\`\n**${cfg.prefix}catmeme**\n\`get catmeme.\`\n**${cfg.prefix}sadcat**\n\`get sad cat.\`\n`, true)
-    .addField('__Normies__', `**${cfg.prefix}meme**\n\`generic meme.\`\n**${cfg.prefix}meirl**\n\`you irl.\``, true)
-    .addField('__Utility__', `**${cfg.prefix}remindme**\n\`forget much?\``, true)
-    .setFooter('Mr.Cat | Gib mouse, thanks.')
-    .setColor(emcolor)
-    return message.channel.send(embed);
+  if(command === "help") {
+  const cmd = args.join(" ");
+  // Sending help message when only writing help.
+  if(!args[0]) {
+      let embed = new MessageEmbed()
+      .setTitle('General Commands')
+      .setColor('#36393F')
+      .setThumbnail(client.user.displayAvatarURL())
+      .setFooter(`${client.user.username} | By: ${cfg.ownertag}`)
+      .setDescription([`
+      \`${cfg.prefix}help\` → get help menu.
+      \`${cfg.prefix}info\` → get bot information.
+      \`${cfg.prefix}ping\` → get bot current ping.
+      \`${cfg.prefix}inv\` → invite me.
+      \`${cfg.prefix}support\` → cat abuse hotline.
+  `])
+      .addField('More Commands', [`
+          \`${cfg.prefix}help cat\` → get cat help.
+          \`${cfg.prefix}help weeb\` → get weeb help.
+          \`${cfg.prefix}help catnip\` → get catnip help.
+          \`${cfg.prefix}help normie\` → get normie help.
+          \`${cfg.prefix}help util\` → get util help.
+      `])
+      .addField('Prefix Information', `Prefix: \`${cfg.prefix}\``, false)
+      return message.channel.send(embed);
   }
+  // Catlicious
+  if(cmd === 'cat') {
+    let embed = new MessageEmbed()
+    .setTitle('Help 101 → Catlicios')
+    .setColor('#36393F')
+    .setFooter(`${client.user.username} | By: etcroot#6666`)
+    .setDescription([`
+        \`${cfg.prefix}cat\` → get cat.
+        \`${cfg.prefix}catmeme\` → get catmeme.
+        \`${cfg.prefix}sadcat\` → get sad cat.
+    `])
+    return message.channel.send(embed);
+}
+// Weaboos
+if(cmd === 'weeb') {
+  let embed = new MessageEmbed()
+  .setTitle('Help 101 → Weaboo')
+  .setColor('#36393F')
+  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setDescription([`
+      \`${cfg.prefix}anime\` → random or search anime.
+      \`${cfg.prefix}manga\` → search manga.
+      \`${cfg.prefix}animeme\` → anime memes.
+      \`${cfg.prefix}moe\` → moe's.
+  `])
+  return message.channel.send(embed);
+}
+// Catnips
+if(cmd === 'catnip') {
+  let embed = new MessageEmbed()
+  .setTitle('Help 101 → Catnip')
+  .setColor('#36393F')
+  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setDescription([`
+      \`${cfg.prefix}catnips\` → see catnips.
+      \`${cfg.prefix}lb\` → show catnipboard.
+  `])
+  .addField('What is catnips & How do i gain them?', 'They\'re just catnips, gain by being active in chat, i might add something to do with them later.', false)
+  return message.channel.send(embed);
+}
+// Normies
+if(cmd === 'normie') {
+  let embed = new MessageEmbed()
+  .setTitle('Help 101 → Normies')
+  .setColor('#36393F')
+  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setDescription([`
+      \`${cfg.prefix}meme\` → generic meme.
+      \`${cfg.prefix}meirl\` → you irl.
+  `])
+  return message.channel.send(embed);
+}
+// Utility
+if(cmd === 'util') {
+  let embed = new MessageEmbed()
+  .setTitle('Help 101 → Utility')
+  .setColor('#36393F')
+  .setFooter(`${client.user.username} | By: etcroot#6666`)
+  .setDescription([`
+      \`${cfg.prefix}remineme\` → forget much?
+  `])
+  return message.channel.send(embed);
+}
+}
   // Info Command
   if (command === "info") {
     const moment = require('moment');
