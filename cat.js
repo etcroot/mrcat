@@ -61,15 +61,14 @@ client.on("message", async (message) => {
     const embed = new MessageEmbed()
     .setTitle('__Mr.Cat Commands 101__')
     .setDescription('All commands uses `mr.`')
-    .addField('__General__', `\`${cfg.prefix}help\` - get cat help.\n\`${cfg.prefix}ping\` - get cat ping.\n\`${cfg.prefix}info\` - cat info.\n\`${cfg.prefix}inv\` - invite me.\n\`${cfg.prefix}support\` - cat support hotline.\n`, true)
-    .addField('__Rank__', `\`${cfg.prefix}catnips\` - see catnips.\n\`${cfg.prefix}lb\` - show catnipboard.\n\`${cfg.prefix}howto\` - how to catnip.`, true)
-    .addField('__Catlicious__', `\`${cfg.prefix}cat\` - get cat.\n\`${cfg.prefix}catmeme\` - get catmeme.\n\`${cfg.prefix}sadcat\` - get sad cat.\n`, true)
-    .addField('__Normies__', `\`${cfg.prefix}meme\` - generic meme.\n\`${cfg.prefix}meirl\` - you irl.`, true)
-    .addField('__Weaboos__', `\`${cfg.prefix}anime\` - search anime.\n\`${cfg.prefix}manga\` - search manga.\n\`${cfg.prefix}animeme\` - anime memes.\n\`${cfg.prefix}moe\` - moe's.`, true)
-    .addField('__Utility__', `\`${cfg.prefix}remindme\` - forget much?`, true)
+    .addField('__General__', `**${cfg.prefix}help**\nget cat help.\n**${cfg.prefix}ping**\nget cat ping.\n**${cfg.prefix}info**\ncat info.\n**${cfg.prefix}inv**\ninvite me.\n**${cfg.prefix}support**\ncat support hotline.\n`, true)
+    .addField('__Weaboos__', `**${cfg.prefix}anime**\nrandom or search anime.\n**${cfg.prefix}manga**\nandom or search manga.\n**${cfg.prefix}animeme**\nanime memes.\n**${cfg.prefix}moe**\nmoe's.`, true)
+    .addField('__Rank__', `**${cfg.prefix}catnips**\nsee catnips.\n**${cfg.prefix}lb**\nshow catnipboard.\n**${cfg.prefix}howto**\nhow to catnip.`, true)
+    .addField('__Catlicious__', `**${cfg.prefix}cat**\nget cat.\n**${cfg.prefix}catmeme**\nget catmeme.\n**${cfg.prefix}sadcat**\nget sad cat.\n`, true)
+    .addField('__Normies__', `**${cfg.prefix}meme**\ngeneric meme.\n**${cfg.prefix}meirl**\nyou irl.`, true)
+    .addField('__Utility__', `**${cfg.prefix}remindme**\nforget much?`, true)
     .setFooter('Gib mouse, thanks.')
     .setColor(emcolor)
-    .setThumbnail(client.user.displayAvatarURL())
     return message.channel.send(embed);
   }
   // Info Command
