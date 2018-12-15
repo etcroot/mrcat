@@ -229,7 +229,11 @@ if(cmd === 'util') {
   if(command === "fact") {
     const fact = await get("https://catfact.ninja/fact")
       .then((res) => res.body.fact);
-    return message.channel.send(`😼 **Catfact:** *${fact}*`);
+      const embed = new MessageEmbed()
+      .setColor(emcolor)
+      .setTitle('Catfact:')
+      .setDescription(`${fact}`)
+    return message.channel.send(embed);
   }
   // Cat Memes
   if(command === "catmeme") {
