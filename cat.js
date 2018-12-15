@@ -62,8 +62,7 @@ client.on("message", async (message) => {
   if(!args[0]) {
       let embed = new MessageEmbed()
       .setTitle('General Commands')
-      .setColor('#36393F')
-      .setThumbnail(client.user.displayAvatarURL())
+      .setColor(emcolor)
       .setFooter(`${client.user.username} | By: etcroot#6666`)
       .setDescription([`
       \`${cfg.prefix}help\` → get help menu.
@@ -86,7 +85,7 @@ client.on("message", async (message) => {
   if(cmd === 'cat') {
     let embed = new MessageEmbed()
     .setTitle('Help 101 → Catlicious')
-    .setColor('#36393F')
+    .setColor(emcolor)
     .setFooter(`${client.user.username} | By: etcroot#6666`)
     .setDescription([`
         \`${cfg.prefix}cat\` → get cat.
@@ -99,7 +98,7 @@ client.on("message", async (message) => {
 if(cmd === 'weeb') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Weaboo')
-  .setColor('#36393F')
+  .setColor(emcolor)
   .setFooter(`${client.user.username} | By: etcroot#6666`)
   .setDescription([`
       \`${cfg.prefix}anime\` → random or search anime.
@@ -113,7 +112,7 @@ if(cmd === 'weeb') {
 if(cmd === 'catnip') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Catnip')
-  .setColor('#36393F')
+  .setColor(emcolor)
   .setFooter(`${client.user.username} | By: etcroot#6666`)
   .setDescription([`
       \`${cfg.prefix}catnips\` → see catnips.
@@ -126,7 +125,7 @@ if(cmd === 'catnip') {
 if(cmd === 'normie') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Normies')
-  .setColor('#36393F')
+  .setColor(emcolor)
   .setFooter(`${client.user.username} | By: etcroot#6666`)
   .setDescription([`
       \`${cfg.prefix}meme\` → generic meme.
@@ -138,7 +137,7 @@ if(cmd === 'normie') {
 if(cmd === 'util') {
   let embed = new MessageEmbed()
   .setTitle('Help 101 → Utility')
-  .setColor('#36393F')
+  .setColor(emcolor)
   .setFooter(`${client.user.username} | By: etcroot#6666`)
   .setDescription([`
       \`${cfg.prefix}remineme\` → forget much?
