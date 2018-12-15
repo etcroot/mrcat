@@ -64,7 +64,7 @@ client.on("message", async (message) => {
       .setTitle('General Commands')
       .setColor('#36393F')
       .setThumbnail(client.user.displayAvatarURL())
-      .setFooter(`${client.user.username} | By: ${cfg.ownertag}`)
+      .setFooter(`${client.user.username} | By: etcroot#6666`)
       .setDescription([`
       \`${cfg.prefix}help\` → get help menu.
       \`${cfg.prefix}info\` → get bot information.
