@@ -1,3 +1,4 @@
+// Fetching modules & libs
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const cfg = require('./src/config.json');
@@ -7,7 +8,12 @@ const SQLite = require("better-sqlite3");
 const sql = new SQLite('./src/db.sqlite');
 const { get } = require("superagent");
 const randomPuppy = require('random-puppy');
+const ms = require("ms");
+const Kitsu = require('kitsu.js');
+const kitsu = new Kitsu();
+var aq = require('animequote');
 
+// Ready Event
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);  
   const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'scores';").get();
@@ -58,6 +64,8 @@ client.on("message", async (message) => {
     .addField('__Rank__', `\`${cfg.prefix}catnips\` - see catnips.\n\`${cfg.prefix}lb\` - show catnipboard.\n\`${cfg.prefix}howto\` - how to catnip.`, true)
     .addField('__Catlicious__', `\`${cfg.prefix}cat\` - get cat.\n\`${cfg.prefix}catmeme\` - get catmeme.\n\`${cfg.prefix}sadcat\` - get sad cat.\n`, true)
     .addField('__Normies__', `\`${cfg.prefix}meme\` - generic meme.\n\`${cfg.prefix}meirl\` - you irl.`, true)
+    .addField('__Weaboos__', `\`${cfg.prefix}anime\` - search anime.\n\`${cfg.prefix}animeme\` - anime memes.`, true)
+    .addField('__Utility__', `\`${cfg.prefix}remindme\` - forget much?`, true)
     .setFooter('Gib mouse, thanks.')
     .setColor(emcolor)
     .setThumbnail(client.user.displayAvatarURL())
@@ -200,6 +208,75 @@ client.on("message", async (message) => {
         .setColor(emcolor)
      return message.channel.send({ embed });
 })
+  }
+  // Me IRL
+  if(command === "animeme") {
+    randomPuppy('animemes')
+    .then(url => {
+        const embed = new MessageEmbed()
+        .setImage(url)
+        .setColor(emcolor)
+     return message.channel.send({ embed });
+})
+  }
+  if(command === "remindme") {
+    let reminderTime = args[0];
+      if(!reminderTime) return message.channel.send(`**Specify a time for me to remind you. Usage: \`${cfg.prefix}remind 15min | Code**\``);
+      let reminder = args.slice(1).join(" ");
+      let remindEmbed = new MessageEmbed()
+      .setColor(emcolor)
+      .addField("Reminder", `${reminder}`)
+      .addField("Time", `\`${reminderTime}\``)
+      message.channel.send(remindEmbed);
+      setTimeout(function(){
+        return message.author.send(`Hey! You wanted me to remind you: ${reminder}`)
+      }, ms(reminderTime));
+  }
+  if(command === "anime") {
+    
+    var search = message.content.split(/\s+/g).slice(1).join(" ");
+
+    if (!search) {
+
+        kitsu.searchAnime(aq().quoteanime).then(result => {
+
+            var anime = result[0]
+
+            var embed = new MessageEmbed()
+                .setColor(emcolor)
+                .setAuthor(`${anime.titles.english} | ${anime.showType}`, anime.posterImage.original)
+                .setDescription(anime.synopsis.replace(/<[^>]*>/g, '').split('\n')[0])
+                .addField('❯\u2000\Information', `•\u2000\**Japanese Name:** ${anime.titles.romaji}\n\•\u2000\**Age Rating:** ${anime.ageRating}\n\•\u2000\**NSFW:** ${anime.nsfw ? 'Yes' : 'No'}`, true)
+                .addField('❯\u2000\Stats', `•\u2000\**Average Rating:** ${anime.averageRating}\n\•\u2000\**Rating Rank:** ${anime.ratingRank}\n\•\u2000\**Popularity Rank:** ${anime.popularityRank}`, true)
+                .addField('❯\u2000\Status', `•\u2000\**Episodes:** ${anime.episodeCount ? anime.episodeCount : 'N/A'}\n\•\u2000\**Start Date:** ${anime.startDate}\n\•\u2000\**End Date:** ${anime.endDate ? anime.endDate : "Still airing"}`, true)
+                .setImage(anime.posterImage.original);
+            return message.channel.send(`Try watching **${anime.titles.english}**!`, { embed: embed });
+        })
+
+    } else {
+        var search = message.content.split(/\s+/g).slice(1).join(" ");
+
+        kitsu.searchAnime(search).then(result => {
+            if (result.length === 0) {
+                return message.channel.send(`No results found for **${search}**!`);
+            }
+
+            var anime = result[0]
+
+            var embed = new MessageEmbed()
+                .setColor(emcolor)
+                .setAuthor(`${anime.titles.english ? anime.titles.english : search} | ${anime.showType}`, anime.posterImage.original)
+                .setDescription(anime.synopsis.replace(/<[^>]*>/g, '').split('\n')[0])
+                .addField('❯\u2000\Information', `•\u2000\**Japanese Name:** ${anime.titles.romaji}\n\•\u2000\**Age Rating:** ${anime.ageRating}\n\•\u2000\**NSFW:** ${anime.nsfw ? 'Yes' : 'No'}`, true)
+                .addField('❯\u2000\Stats', `•\u2000\**Average Rating:** ${anime.averageRating}\n\•\u2000\**Rating Rank:** ${anime.ratingRank}\n\•\u2000\**Popularity Rank:** ${anime.popularityRank}`, true)
+                .addField('❯\u2000\Status', `•\u2000\**Episodes:** ${anime.episodeCount ? anime.episodeCount : 'N/A'}\n\•\u2000\**Start Date:** ${anime.startDate}\n\•\u2000\**End Date:** ${anime.endDate ? anime.endDate : "Still airing"}`, true)
+                .setImage(anime.posterImage.original);
+            return message.channel.send({ embed });
+        }).catch(err => {
+            console.log(err)
+            return message.channel.send(`No results found for **${search}**!`);
+        });
+    }
   }
 });
 
