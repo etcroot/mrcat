@@ -13,6 +13,10 @@ const Kitsu = require('kitsu.js');
 const kitsu = new Kitsu();
 var aq = require('animequote');
 const catname = require('cat-names');
+Array.prototype.random = function() {
+  return this[Math.floor(Math.random() * this.length)];
+};
+const fs = require('fs');
 
 // Ready Event
 client.on('ready', () => {
@@ -77,6 +81,7 @@ client.on("message", async (message) => {
           \`${cfg.prefix}help weeb\` → get weeb help.
           \`${cfg.prefix}help catnip\` → get catnip help.
           \`${cfg.prefix}help normie\` → get normie help.
+          \`${cfg.prefix}help animals\` → get animals help.
           \`${cfg.prefix}help util\` → get util help.
       `])
       .addField('Prefix Information', `Prefix: \`${cfg.prefix}\``, false)
@@ -119,7 +124,6 @@ if(cmd === 'catnip') {
   .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
       \`${cfg.prefix}catnips\` → see catnips.
-      \`${cfg.prefix}lb\` → show catnipboard.
   `])
   .addField('What is catnips & How do i gain them?', 'They\'re just catnips, gain by being active in chat, i might add something to do with them later.', false)
   return message.channel.send(embed);
@@ -131,8 +135,9 @@ if(cmd === 'normie') {
   .setColor(emcolor)
   .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
-      \`${cfg.prefix}meme\` → generic meme.
-      \`${cfg.prefix}meirl\` → you irl.
+      \`${cfg.prefix}meme\` → /r/wholesomememes.
+      \`${cfg.prefix}meirl\` → /r/Me_Irl.
+      \`${cfg.prefix}pt\` → /r/PerfectTiming.
   `])
   return message.channel.send(embed);
 }
@@ -157,7 +162,7 @@ if(cmd === 'animals') {
   .setColor(emcolor)
   .setFooter(`${client.user.username} | By: ${owner}`)
   .setDescription([`
-      Nothing to see here yet.
+  \`${cfg.prefix}aww\` → /r/Aww.
   `])
   return message.channel.send(embed);
 }
@@ -197,19 +202,6 @@ if(cmd === 'animals') {
   // Support Hotline
   if(command === "support") {
     return message.reply(`https://discord.gg/UrtVQZp`);
-  }
-  // Leaderboard
-  if(command === "lb") {
-    const top10 = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
-    const embed = new MessageEmbed()
-      .setTitle("Leaderboard")
-      .setDescription("Our top 10 catnip leaders!")
-      .setColor(emcolor);
-   
-    for(const data of top10) {
-      embed.addField(client.users.get(data.user).tag, `${data.points} catnips`);
-    }
-    return message.channel.send({embed});
   }
   // How To Catnip
   if(command === "howto") {
@@ -315,6 +307,26 @@ if(cmd === 'animals') {
   // Moe
   if(command === "moe") {
     randomPuppy('awwnime')
+    .then(url => {
+        const embed = new MessageEmbed()
+        .setImage(url)
+        .setColor(emcolor)
+     return message.channel.send({ embed });
+})
+  }
+  // Aww
+  if(command === "aww") {
+    randomPuppy('aww')
+    .then(url => {
+        const embed = new MessageEmbed()
+        .setImage(url)
+        .setColor(emcolor)
+     return message.channel.send({ embed });
+})
+  }
+  // Perfect Timing
+  if(command === "pt") {
+    randomPuppy('PerfectTiming')
     .then(url => {
         const embed = new MessageEmbed()
         .setImage(url)
