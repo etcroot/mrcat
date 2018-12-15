@@ -385,6 +385,7 @@ if(cmd === 'util') {
             return message.channel.send(`No results found for **${search}**!`)
         })
   }
+  // Gay calculator
   if(command === "gaycalc") {
     const gay = [
       "You're pretty straight.",
